@@ -6,18 +6,36 @@ using System.Threading.Tasks;
 
 namespace certificacao_csharp_roteiro
 {
+
+    interface IGPS
+    {
+        bool EstaNoHemisferioNorte();
+    }
+
+    struct PosicaoGPS : IGPS
+            {
+                public double Latitude;
+                public double Longitude;
+
+                public PosicaoGPS(double latitude, double longitude)
+                {
+                    Latitude = latitude;
+                    Longitude = longitude;
+                }
+
+                public bool EstaNoHemisferioNorte()
+                {
+                    return Latitude > 0;
+                }
+            }
+
     class Estruturas : IAulaItem
     {
         public void Executar()
         {
-            double Latitude1 = 13.78;
-            double Longitude1 = 29.51;
-            double Latitude2 = 40.23;
-            double Longitude2 = 17.4;
-            Console.WriteLine($"Latitude1 = {Latitude1}");
-            Console.WriteLine($"Longitude1 = {Longitude1}");
-            Console.WriteLine($"Latitude2 = {Latitude2}");
-            Console.WriteLine($"Longitude2 = {Longitude2}");
+
+            PosicaoGPS localizacao = new PosicaoGPS(23.6, 21.9);
+            Console.WriteLine(localizacao.Latitude);
         }
     }
 }
